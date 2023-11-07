@@ -1,1 +1,12 @@
+# Import library yang dibutuhkan
+import matplotlib.pyplot as plt
 import numpy as np
+from tkinter import *
+
+# Definisikan fungsi untuk menghitung kecepatan dan sudut gerak parabola
+def hitung_kecepatan_sudut(jarak, ketinggian):
+    # Hitung kecepatan awal
+    kecepatan_awal = np.sqrt(2 * 9.8 * ketinggian)
+
+    # Hitung sudut elevasi
+    sudut_elevasi = np.arctan2(ketinggian, jarak)
