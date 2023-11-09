@@ -10,3 +10,65 @@ def hitung_kecepatan_sudut(jarak, ketinggian):
 
     # Hitung sudut elevasi
     sudut_elevasi = np.arctan2(ketinggian, jarak)
+
+    return kecepatan_awal, sudut_elevasi
+
+# Definisikan fungsi untuk membuat grafik hubungan antara jarak dan ketinggian gerak parabola
+def buat_grafik(jarak, ketinggian):
+    # Buat plot
+    plt.plot(jarak, ketinggian)
+
+    # Tambahkan judul
+    plt.title("Grafik Hubungan Jarak dan Ketinggian Gerak Parabola")
+
+    # Tambahkan label untuk sumbu x dan y
+    plt.xlabel("Jarak (m)")
+    plt.ylabel("Ketinggian (m)")
+
+    # Tampilkan grafik
+    plt.show()
+
+# Definisikan fungsi utama
+def main():
+    # Buat jendela GUI
+    root = Tk()
+
+    # Buat label dan entry untuk input jarak
+    label_jarak = Label(root, text="Jarak (m)")
+    entry_jarak = Entry(root)
+
+    # Buat label dan entry untuk input ketinggian
+    label_ketinggian = Label(root, text="Ketinggian (m)")
+    entry_ketinggian = Entry(root)
+
+    # Letakkan label dan entry ke dalam jendela GUI
+    label_jarak.grid(row=0, column=0)
+    entry_jarak.grid(row=0, column=1)
+    label_ketinggian.grid(row=1, column=0)
+    entry_ketinggian.grid(row=1, column=1)
+
+    # Buat tombol untuk menghitung kecepatan dan sudut
+    button_hitung = Button(root, text="Hitung", command=lambda: hitung(float(entry_jarak.get()), float(entry_ketinggian.get())))
+    button_hitung.grid(row=3, column=0)
+
+    # Buat tombol untuk membuat grafik
+    button_grafik = Button(root, text="Buat Grafik", command=lambda: buat_grafik(jarak, ketinggian))
+    button_grafik.grid(row=3, column=1)
+
+    # Jalankan jendela GUI
+    root.mainloop()
+
+# Fungsi untuk menghitung kecepatan dan sudut gerak parabola berdasarkan input dari GUI
+def hitung(jarak, ketinggian):
+    # Hitung kecepatan dan sudut
+    kecepatan_awal, sudut_elevasi = hitung_kecepatan_sudut(jarak, ketinggian)
+
+    # Tampilkan nilai kecepatan dan sudut
+    global root
+    label_kecepatan = Label(root, text="Kecepatan Awal (m/s): " + str(kecepatan_awal))
+    label_kecepatan.grid(row=4, column=0)
+    label_sudut = Label(root, text="Sudut Elevasi (derajat): " + str(sudut_elevasi * 180 / np.pi))
+    label_sudut.grid(row=5, column=0)
+
+# Jalankan fungsi utama
+main()
